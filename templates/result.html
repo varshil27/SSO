@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask Your PDF</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .comparison-history {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card bg-dark">
+                    <div class="card-header bg-black">
+                        <h4 class="mb-0 text-white">Ask Your PDF</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if session %}
+                        <p class="text-center">Welcome, {{ session.userinfo.name }}!</p>
+                        <p class="text-center text-white">{{ result.answer }}</p>
+                        <div class="text-center">
+                            <a href="{{ url_for('logout') }}" class="btn btn-light">Log out</a>
+                        </div>
+                        {% else %}
+                        <p class="text-center">You need to log in to access this page.</p>
+                        <div class="text-center">
+                            <a href="{{ url_for('login') }}" class="btn btn-light">Log in</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-dark">
+                    <div class="card-header bg-black">
+                        <h4 class="mb-0 text-white">Chat History</h4>
+                    </div>
+                    <div class="card-body comparison-history">
+                        {% if history %}
+                        <ul class="list-group">
+                            {% for item in history %}
+                            <li class="list-group-item bg-dark text-white">
+                                <small class="text-muted">{{ item.query }}</small><br>
+                                <small class="text-muted">{{ item.answer }}</small>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-center">No comparison history found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

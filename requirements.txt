@@ -1,0 +1,12 @@
+authlib
+dnspython
+Flask
+nltk
+PyPDF2
+pymongo
+python-dotenv
+requests
+scikit-learn
+chromadb
+langchain
+openai
